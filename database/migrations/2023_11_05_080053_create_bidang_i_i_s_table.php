@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('bidang_i_i_s', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-
+            $table->string('nama');
+            $table->date('tanggal_lahir');
             $table->timestamps();
         });
     }

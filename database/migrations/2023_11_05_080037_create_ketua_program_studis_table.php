@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('ketua_program_studis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-
+            $table->string('nama');
+            $table->date('tanggal_lahir');
             $table->timestamps();
         });
     }

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class BidangIISeeder extends Seeder
 {
@@ -12,6 +14,21 @@ class BidangIISeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        //data
+        $data = [
+            [
+                'user_id' => 184,
+                'nama' => 'Dr. berkah , S.T., M.T.',
+                'tanggal_lahir' => '1965-01-01',
+            ]
+        ];
+
+        foreach ($data as $d) {
+            DB::table('bidang_i_i_s')->insert([
+                'user_id' => $d['user_id'],
+                'nama' => $d['nama'],
+                'tanggal_lahir' => $d['tanggal_lahir'],
+            ]);
+        }
     }
 }

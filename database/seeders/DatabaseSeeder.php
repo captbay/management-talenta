@@ -12,11 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // seed user
+        $this->call(UserSeeder::class);
+        // seed dosen
+        $this->call(DosenSeeder::class);
+        // seed pegawai
+        $this->call(PegawaiSeeder::class);
+        // seed ketua kelompok keahlian
+        $this->call(KetuaKelompokKeahlianSeeder::class);
+        // seed kepala urusan sumber daya
+        $this->call(KepalaUrusanSumberDayaSeeder::class);
+        // seed ketua program studi
+        $this->call(KetuaProgramStudiSeeder::class);
+        // seed bidang II
+        $this->call(BidangIISeeder::class);
     }
 }
