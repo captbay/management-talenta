@@ -22,9 +22,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
+        'role',
     ];
 
     /**
@@ -53,5 +53,25 @@ class User extends Authenticatable
     public function pegawai()
     {
         return $this->hasOne(pegawai::class, 'user_id');
+    }
+
+    public function kaprodi()
+    {
+        return $this->hasOne(ketuaProgramStudi::class, 'user_id');
+    }
+
+    public function ketuaKelompokKeahlian()
+    {
+        return $this->hasOne(ketuaKelompokKeahlian::class, 'user_id');
+    }
+
+    public function kepalaUrusanSumberDaya()
+    {
+        return $this->hasOne(kepalaUrusanSumberDaya::class, 'user_id');
+    }
+
+    public function bidangII()
+    {
+        return $this->hasOne(BidangII::class, 'user_id');
     }
 }
