@@ -26,7 +26,7 @@ class KetuaKelompokKeahlianCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\KetuaKelompokKeahlian::class);
+        CRUD::setModel(\App\Models\ketuaKelompokKeahlian::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/ketua-kelompok-keahlian');
         CRUD::setEntityNameStrings('ketua kelompok keahlian', 'ketua kelompok keahlians');
     }

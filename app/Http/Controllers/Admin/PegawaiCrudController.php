@@ -26,7 +26,7 @@ class PegawaiCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Pegawai::class);
+        CRUD::setModel(\App\Models\pegawai::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/pegawai');
         CRUD::setEntityNameStrings('pegawai', 'pegawais');
     }

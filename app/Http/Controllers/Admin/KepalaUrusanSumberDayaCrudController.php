@@ -26,7 +26,7 @@ class KepalaUrusanSumberDayaCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\KepalaUrusanSumberDaya::class);
+        CRUD::setModel(\App\Models\kepalaUrusanSumberDaya::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/kepala-urusan-sumber-daya');
         CRUD::setEntityNameStrings('kepala urusan sumber daya', 'kepala urusan sumber dayas');
     }

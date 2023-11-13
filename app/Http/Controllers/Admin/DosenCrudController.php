@@ -26,7 +26,7 @@ class DosenCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Dosen::class);
+        CRUD::setModel(\App\Models\dosen::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/dosen');
         CRUD::setEntityNameStrings('dosen', 'dosens');
     }

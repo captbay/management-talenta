@@ -26,7 +26,7 @@ class KetuaProgramStudiCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\KetuaProgramStudi::class);
+        CRUD::setModel(\App\Models\ketuaProgramStudi::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/ketua-program-studi');
         CRUD::setEntityNameStrings('ketua program studi', 'ketua program studis');
     }
