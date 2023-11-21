@@ -195,4 +195,117 @@ class AuthController extends Controller
             'message' => 'Logged out',
         ], 200);
     }
+
+    public function userLogin()
+    {
+        try {
+            $user = Auth::user();
+
+            switch ($user->role) {
+                case 'Dosen':
+                    $data = $user->dosen;
+                    $message = 'Profile Dosen';
+                    break;
+
+                case 'Pegawai':
+                    $data = $user->pegawai;
+                    $message = ' Profile Pegawai';
+                    break;
+
+                case 'Kepala Urusan Sumber Daya':
+                    $data = $user->kepalaUrusanSumberDaya;
+                    $message = ' Profile Kepala Urusan Sumber Daya';
+                    break;
+
+                case 'Ketua Kelompok Keahlian':
+                    $data = $user->ketuaKelompokKeahlian;
+                    $message = ' Profile Ketua Kelompok Keahlian';
+                    break;
+
+                case 'Ketua Program Studi':
+                    $data = $user->kaprodi;
+                    $message = ' Profile Ketua Program Studi';
+                    break;
+
+                case 'Bidang II':
+                    $data = $user->bidangII;
+                    $message = ' Profile Bidang II';
+                    break;
+
+                default:
+                    $data = null;
+                    $message = 'Unknown role';
+                    break;
+            }
+
+            return response()->json([
+                'data' => $data,
+                'username' => $user->username,
+                'message' => $message,
+                'role' => $user->role,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    // updateUserLogin
+    public function updateUserLogin(Request $request)
+    {
+        try {
+            $user = Auth::user();
+
+            switch ($user->role) {
+                case 'Dosen':
+                    $data = $user->dosen;
+                    $message = 'Berhasil Edit Data Dosen';
+                    break;
+
+                case 'Pegawai':
+                    $data = $user->pegawai;
+                    $message = ' Berhasil Edit Data Pegawai';
+                    break;
+
+                case 'Kepala Urusan Sumber Daya':
+                    $data = $user->kepalaUrusanSumberDaya;
+                    $message = ' Berhasil Edit Data Kepala Urusan Sumber Daya';
+                    break;
+
+                case 'Ketua Kelompok Keahlian':
+                    $data = $user->ketuaKelompokKeahlian;
+                    $message = ' Berhasil Edit Data Ketua Kelompok Keahlian';
+                    break;
+
+                case 'Ketua Program Studi':
+                    $data = $user->kaprodi;
+                    $message = ' Berhasil Edit Data Ketua Program Studi';
+                    break;
+
+                case 'Bidang II':
+                    $data = $user->bidangII;
+                    $message = ' Berhasil Edit Data Bidang II';
+                    break;
+
+                default:
+                    $data = null;
+                    $message = 'Unknown role';
+                    break;
+            }
+
+            $data->update($request->all());
+
+            return response()->json([
+                'data' => $data,
+                'message' => $message
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }

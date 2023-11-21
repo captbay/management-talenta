@@ -22,9 +22,9 @@ class DosenImport implements ToModel
             'nip' => $row[3] === 'null' ? null : $row[3],
             'kode_dosen' => $row[4] === 'null' ? null : $row[4],
             'jfa' => $row[5] === 'null' ? null : $row[5],
-            'tmt_jad' => $row[6] === 'null' ? null : Carbon::parse($row[6])->format('Y-m-d'),
+            'tmt_jad' => $row[6] === 'null' ? null : Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[6])),
             'golongan' => $row[7] === 'null' ? null : $row[7],
-            'tmt_inpassing' => $row[8] === 'null' ? null : Carbon::parse($row[8])->format('Y-m-d'),
+            'tmt_inpassing' => $row[8] === 'null' ? null : Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[8])),
             'no_serdos' => $row[9] === 'null' ? null : $row[9],
             'pendidikan_terakhir' => $row[10] === 'null' ? null : $row[10],
             'jurusan_pendidikan_terakhir' => $row[11] === 'null' ? null : $row[11],
@@ -33,10 +33,12 @@ class DosenImport implements ToModel
             'prodi' => $row[14] === 'null' ? null : $row[14],
             'jenis_kelamin' => $row[15] === 'null' ? null : $row[15],
             'status_pegawai' => $row[16] === 'null' ? null : $row[16],
-            'tanggal_masuk' => $row[17] === 'null' ? null : Carbon::parse($row[17])->format('Y-m-d'),
+            'tanggal_masuk' => $row[17] === 'null' ? null : Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[17])),
             'tempat_lahir' => $row[18] === 'null' ? null : $row[18],
-            'tanggal_lahir' => $row[19] === 'null' ? null : Carbon::parse($row[19])->format('Y-m-d'),
+            'tanggal_lahir' => $row[19] === 'null' ? null : Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[19])),
             'email' => $row[20] === 'null' ? null : $row[20],
+            'jumlah_karya_ilmiah' => $row[21] === 'null' ? null : $row[21],
+            'jumlah_pengabdian_masyarakat' => $row[22] === 'null' ? null : $row[22],
         ]);
     }
 }

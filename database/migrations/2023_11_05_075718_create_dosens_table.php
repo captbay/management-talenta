@@ -62,6 +62,10 @@ return new class extends Migration
             // $table->string('umur'); // nanti pake for human dari tanggal lahir sampe date now
             // email
             $table->string('email')->nullable();
+            // jumlah karya ilmiah
+            $table->integer('jumlah_karya_ilmiah')->nullable();
+            // jumlah pengabdian masyarakat
+            $table->integer('jumlah_pengabdian_masyarakat')->nullable();
             $table->timestamps();
         });
     }

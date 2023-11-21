@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BidangII;
-use App\Http\Requests\StoreBidangIIRequest;
-use App\Http\Requests\UpdateBidangIIRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BidangIIController extends Controller
 {
@@ -13,21 +14,21 @@ class BidangIIController extends Controller
      */
     public function index()
     {
-        //
-    }
+        //show data
+        $bidangII = BidangII::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        //response
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar data bidangII',
+            'data' => $bidangII
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBidangIIRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,23 +36,31 @@ class BidangIIController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BidangII $bidangII)
+    public function show($id)
     {
-        //
-    }
+        // find the resource
+        $bidangII = BidangII::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(BidangII $bidangII)
-    {
-        //
+        // if resource not found, response 404
+        if (!$bidangII) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data bidangII tidak ditemukan!'
+            ], 404);
+        }
+
+        // if resource found, response 200
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail data bidangII',
+            'data' => $bidangII
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBidangIIRequest $request, BidangII $bidangII)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -59,7 +68,7 @@ class BidangIIController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BidangII $bidangII)
+    public function destroy($id)
     {
         //
     }

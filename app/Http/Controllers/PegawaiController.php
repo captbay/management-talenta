@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\pegawai;
-use App\Http\Requests\StorepegawaiRequest;
-use App\Http\Requests\UpdatepegawaiRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PegawaiController extends Controller
 {
@@ -13,21 +14,21 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        //
-    }
+        // Get the resource
+        $pegawai = pegawai::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // Return the response
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar data pegawai',
+            'data'    => $pegawai
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepegawaiRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,23 +36,31 @@ class PegawaiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pegawai $pegawai)
+    public function show($id)
     {
-        //
-    }
+        // Get the
+        $pegawai = pegawai::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(pegawai $pegawai)
-    {
-        //
+        // If the resource is not found, return the response 404
+        if (!$pegawai) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data pegawai tidak ditemukan!'
+            ], 404);
+        }
+
+        // If the resource is found, return the response 200
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail data pegawai',
+            'data'    => $pegawai
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepegawaiRequest $request, pegawai $pegawai)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -59,7 +68,7 @@ class PegawaiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pegawai $pegawai)
+    public function destroy($id)
     {
         //
     }

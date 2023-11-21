@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\dosen;
-use App\Http\Requests\StoredosenRequest;
-use App\Http\Requests\UpdatedosenRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DosenController extends Controller
 {
@@ -13,21 +14,20 @@ class DosenController extends Controller
      */
     public function index()
     {
-        //
-    }
+        //show nama, kode_dosen, jfa, prodi, pendidikan_terakhir data dosen
+        $dosens = dosen::select('id', 'nama', 'kode_dosen', 'jfa', 'prodi', 'pendidikan_terakhir')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // return api
+        return response()->json([
+            "message" => "Berhasil mendapatkan semua data dosen",
+            "data" => $dosens
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoredosenRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,23 +35,30 @@ class DosenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(dosen $dosen)
+    public function show($id)
     {
-        //
-    }
+        //find  data dosen
+        $dosen = dosen::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(dosen $dosen)
-    {
-        //
+        // if dosen not found, response json api
+        if (!$dosen) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data dosen tidak ditemukan!',
+            ], 404);
+        }
+
+        // return api
+        return response()->json([
+            "message" => "Berhasil mendapatkan data dosen dengan id: $id",
+            "data" => $dosen
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatedosenRequest $request, dosen $dosen)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -59,7 +66,7 @@ class DosenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(dosen $dosen)
+    public function destroy($id)
     {
         //
     }

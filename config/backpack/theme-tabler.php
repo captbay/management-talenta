@@ -22,13 +22,14 @@ return [
      * Possible values: horizontal, horizontal_dark, horizontal_overlap, vertical,
      * vertical_dark, vertical_transparent (legacy theme), right_vertical, right_vertical_dark, right_vertical_transparent
      */
-    'layout' => 'horizontal_overlap',
+    // 'layout' => 'horizontal_overlap',
+    'layout' => 'vertical_transparent',
 
     /**
      * Pick a login page layout.
      * Possible values: default, illustration, cover
      */
-    'auth_layout' => 'default', // default, illustration, cover
+    'auth_layout' => 'cover', // default, illustration, cover
 
     /**
      * Here you can easily load your own extra css styles.
@@ -39,8 +40,9 @@ return [
      *   - boom!
      */
     'styles' => [
-        base_path('vendor/backpack/theme-tabler/resources/assets/css/color-adjustments.css'),
-        base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/color-adjustments.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css'),
+        base_path('resources\css\styles.css')
     ],
 
     /**
@@ -54,7 +56,7 @@ return [
          * The available color modes.
          */
         'colorModes' => [
-            'system' => 'la-desktop',
+            // 'system' => 'la-desktop',
             'light' => 'la-sun',
             'dark' => 'la-moon',
         ],
@@ -62,7 +64,7 @@ return [
         /**
          * The color mode used by default.
          */
-        'defaultColorMode' => 'system', // system, light, dark
+        'defaultColorMode' => 'light', // system, light, dark
 
         /**
          * When true, a switch is displayed to let admins choose their favorite theme mode.
@@ -85,7 +87,7 @@ return [
         /**
          * When true, the sidebar content for vertical layouts will not scroll with the rest of the content.
          */
-        'sidebarFixed' => false,
+        'sidebarFixed' => true,
 
         /**
          * When true, horizontal layouts will display the classic top bar on top to free some space when multiple nav items are used.
@@ -157,13 +159,13 @@ return [
     ],
 
     /**
-     * 4th Layer of customization
-     *
-     * Alright, if nothing so far met your need, then you still have an easy way to build
-     * a custom layout using the already existing components of this theme.
-     *
-     * 1. Create a new blade file in resources/views/layouts/your-custom-layout.blade.php
-     * 2. Replace the value of layout on this file with "your-custom-layout"
-     * 3. Customize the blade and place components such as sidebar, header, top-bar, where you need them!
-     */
+ * 4th Layer of customization
+ *
+ * Alright, if nothing so far met your need, then you still have an easy way to build
+ * a custom layout using the already existing components of this theme.
+ *
+ * 1. Create a new blade file in resources/views/layouts/your-custom-layout.blade.php
+ * 2. Replace the value of layout on this file with "your-custom-layout"
+ * 3. Customize the blade and place components such as sidebar, header, top-bar, where you need them!
+ */
 ];

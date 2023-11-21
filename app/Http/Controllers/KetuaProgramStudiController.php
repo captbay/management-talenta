@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ketuaProgramStudi;
-use App\Http\Requests\StoreketuaProgramStudiRequest;
-use App\Http\Requests\UpdateketuaProgramStudiRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KetuaProgramStudiController extends Controller
 {
@@ -13,21 +14,21 @@ class KetuaProgramStudiController extends Controller
      */
     public function index()
     {
-        //
-    }
+        // Get the
+        $ketuaProgramStudi = ketuaProgramStudi::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // Return the response
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar data ketuaProgramStudi',
+            'data'    => $ketuaProgramStudi
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreketuaProgramStudiRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,23 +36,31 @@ class KetuaProgramStudiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ketuaProgramStudi $ketuaProgramStudi)
+    public function show($id)
     {
-        //
-    }
+        // Find the resource
+        $ketuaProgramStudi = ketuaProgramStudi::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ketuaProgramStudi $ketuaProgramStudi)
-    {
-        //
+        // If the resource is not found, return the response 404
+        if (!$ketuaProgramStudi) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data ketuaProgramStudi tidak ditemukan!'
+            ], 404);
+        }
+
+        // If the resource is found, return the response 200
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail data ketuaProgramStudi',
+            'data'    => $ketuaProgramStudi
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateketuaProgramStudiRequest $request, ketuaProgramStudi $ketuaProgramStudi)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -59,7 +68,7 @@ class KetuaProgramStudiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ketuaProgramStudi $ketuaProgramStudi)
+    public function destroy($id)
     {
         //
     }

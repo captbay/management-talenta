@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ketuaKelompokKeahlian;
-use App\Http\Requests\StoreketuaKelompokKeahlianRequest;
-use App\Http\Requests\UpdateketuaKelompokKeahlianRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KetuaKelompokKeahlianController extends Controller
 {
@@ -13,21 +14,21 @@ class KetuaKelompokKeahlianController extends Controller
      */
     public function index()
     {
-        //
-    }
+        // get all data ketuaKelompokKeahlian
+        $ketuaKelompokKeahlian = ketuaKelompokKeahlian::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // return api
+        return response()->json([
+            'success' => true,
+            'message' => 'Daftar data ketuaKelompokKeahlian',
+            'data'    => $ketuaKelompokKeahlian
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreketuaKelompokKeahlianRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,23 +36,31 @@ class KetuaKelompokKeahlianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ketuaKelompokKeahlian $ketuaKelompokKeahlian)
+    public function show($id)
     {
-        //
-    }
+        // get all data ketuaKel
+        $ketuaKelompokKeahlian = ketuaKelompokKeahlian::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ketuaKelompokKeahlian $ketuaKelompokKeahlian)
-    {
-        //
+        // if ketuaKelompokKeahlian not found, response json api
+        if (!$ketuaKelompokKeahlian) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data ketuaKelompokKeahlian tidak ditemukan!'
+            ], 404);
+        }
+
+        // return data ketuaKelompokKeahlian
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Data ketuaKelompokKeahlian',
+            'data'    => $ketuaKelompokKeahlian
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateketuaKelompokKeahlianRequest $request, ketuaKelompokKeahlian $ketuaKelompokKeahlian)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -59,7 +68,7 @@ class KetuaKelompokKeahlianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ketuaKelompokKeahlian $ketuaKelompokKeahlian)
+    public function destroy($id)
     {
         //
     }
