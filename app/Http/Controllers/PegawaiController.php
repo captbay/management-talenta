@@ -25,6 +25,42 @@ class PegawaiController extends Controller
         ], 200);
     }
 
+    public function countJabatanFungsional()
+    {
+        // Get data pegawai, group by jabatan_fungsional and grup same name jabatan_fungsional, and count the occurrences of each jabatan_fungsional
+        $pegawais = pegawai::select('jabatan_fungsional')->get()->groupBy('jabatan_fungsional')->map(function ($item) {
+            return [
+                // slice "Jabatan Fungsional" from the jabatan_fungsional name
+                'jabatan_name' => $item->first()->jabatan_fungsional,
+                'jumlah' => $item->count(), // Count occurrences of the jabatan_fungsional
+            ];
+        })->values(); // Convert the map to indexed array
+
+        // Return the structured API response
+        return response()->json([
+            "message" => "Berhasil mendapatkan semua data pegawai",
+            "data" => $pegawais
+        ], 200);
+    }
+
+    public function countStatus()
+    {
+        // Get data pegawai, group by status and grup same name status, and count the occurrences of each status
+        $pegawais = pegawai::select('status')->get()->groupBy('status')->map(function ($item) {
+            return [
+                // slice "Status" from the status name
+                'status_name' => $item->first()->status,
+                'jumlah' => $item->count(), // Count occurrences of the status
+            ];
+        })->values(); // Convert the map to indexed array
+
+        // Return the structured API response
+        return response()->json([
+            "message" => "Berhasil mendapatkan semua data pegawai",
+            "data" => $pegawais
+        ], 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

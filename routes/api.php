@@ -44,6 +44,17 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['auth:sanctum']], function (
     Route::delete('/{id}', [DosenController::class, 'destroy']);
 });
 
+// graph 
+Route::group(['prefix' => 'graph', 'middleware' => ['auth:sanctum']], function () {
+    // dosen
+    Route::get('/count-prodi', [DosenController::class, 'countProdi']);
+    Route::get('/count-kelompok-keahlian', [DosenController::class, 'countKelompokKeahlian']);
+
+    // pegawai
+    Route::get('/count-jabatan-fungsional', [PegawaiController::class, 'countJabatanFungsional']);
+    Route::get('/count-status', [PegawaiController::class, 'countStatus']);
+});
+
 // pegawai
 Route::group(['prefix' => 'pegawai', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/', [PegawaiController::class, 'index']);
