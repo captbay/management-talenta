@@ -28,31 +28,56 @@ class PegawaiController extends Controller
     public function countJabatanFungsional()
     {
         // Get data pegawai, group by jabatan_fungsional and grup same name jabatan_fungsional, and count the occurrences of each jabatan_fungsional
-        $pegawais = pegawai::select('jabatan_fungsional')->get()->groupBy('jabatan_fungsional')->map(function ($item) {
-            return [
-                // slice "Jabatan Fungsional" from the jabatan_fungsional name
-                'jabatan_name' => $item->first()->jabatan_fungsional,
-                'jumlah' => $item->count(), // Count occurrences of the jabatan_fungsional
+        $pegawais = pegawai::select('jabatan_fungsional')
+            ->where('jabatan_fungsional', '!=', null)
+            ->orderBy('jabatan_fungsional', 'asc')
+            ->get()
+            ->groupBy('jabatan_fungsional')
+            ->map(function ($item) {
+                return [
+                    'jabatan_name' => $item->first()->jabatan_fungsional,
+                    'jumlah' => $item->count(), // Count occurrences of the jabatan_fungsional
+                ];
+            })->values(); // Convert the map to indexed array
+
+        // Convert the collection to an array
+        $pegawaisArray = $pegawais->toArray();
+
+        // Custom sorting function
+        usort($pegawaisArray, function ($a, $b) {
+            $order = [
+                "Muda 1", "Muda 2", "Muda 3", "Madya 1", "Madya 2", "Ahli 2", "Utama 2"
             ];
-        })->values(); // Convert the map to indexed array
+
+            $posA = array_search($a['jabatan_name'], $order);
+            $posB = array_search($b['jabatan_name'], $order);
+
+            return $posA - $posB;
+        });
 
         // Return the structured API response
         return response()->json([
             "message" => "Berhasil mendapatkan semua data pegawai",
-            "data" => $pegawais
+            "data" => $pegawaisArray
         ], 200);
     }
+
 
     public function countStatus()
     {
         // Get data pegawai, group by status and grup same name status, and count the occurrences of each status
-        $pegawais = pegawai::select('status')->get()->groupBy('status')->map(function ($item) {
-            return [
-                // slice "Status" from the status name
-                'status_name' => $item->first()->status,
-                'jumlah' => $item->count(), // Count occurrences of the status
-            ];
-        })->values(); // Convert the map to indexed array
+        $pegawais = pegawai::select('status')
+            ->where('status', '!=', null)
+            ->orderBy('status', 'asc')
+            ->get()
+            ->groupBy('status')
+            ->map(function ($item) {
+                return [
+                    // slice "Status" from the status name
+                    'status_name' => $item->first()->status,
+                    'jumlah' => $item->count(), // Count occurrences of the status
+                ];
+            })->values(); // Convert the map to indexed array
 
         // Return the structured API response
         return response()->json([

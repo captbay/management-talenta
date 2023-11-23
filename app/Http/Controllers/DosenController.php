@@ -28,14 +28,20 @@ class DosenController extends Controller
     public function countProdi()
     {
         // Get data dosen, group by prodi and grup same name prodi, and count the occurrences of each prodi
-        $dosens = dosen::select('prodi')->get()->groupBy('prodi')->map(function ($item) {
-            return [
-                // slice "Prodi" from the prodi name and "(FRI)" from the prodi name
-                // 'prodi_name' => str_replace('PRODI', '', str_replace('(FRI)', '', $item->first()->prodi)),
-                'prodi_name' => $item->first()->prodi, // Get the prodi name from the first item in the group
-                'jumlah' => $item->count(), // Count occurrences of the prodi
-            ];
-        })->values(); // Convert the map to indexed array
+        $dosens = dosen::select('prodi')
+            ->where('prodi', '!=', null)
+            ->orderBy('prodi', 'asc')
+            ->get()
+            ->groupBy('prodi')
+            ->map(function ($item) {
+                return [
+                    'prodi_name' => $item->first()->prodi, // Get the prodi name from the first item in the group
+                    'jumlah' => $item->count(), // Count occurrences of the prodi
+                ];
+            })->sortBy(function ($item) {
+                // Custom sorting to move 'PRODI S1 SISTEM INFORMASI (JAKARTA)' to the front
+                return $item['prodi_name'] !== 'PRODI S1 SISTEM INFORMASI (JAKARTA)';
+            })->values(); // Convert the map to indexed array
 
         // Return the structured API response
         return response()->json([
@@ -47,13 +53,18 @@ class DosenController extends Controller
     public function countKelompokKeahlian()
     {
         // Get data dosen, group by kelompok_keahlian and grup same name kelompok_keahlian, and count the occurrences of each kelompok_keahlian
-        $dosens = dosen::select('kelompok_keahlian')->get()->groupBy('kelompok_keahlian')->map(function ($item) {
-            return [
-                // slice "Kelompok Keahlian" from the kelompok_keahlian name
-                'kelompok_keahlian_name' => $item->first()->kelompok_keahlian,
-                'jumlah' => $item->count(), // Count occurrences of the kelompok_keahlian
-            ];
-        })->values(); // Convert the map to indexed array
+        $dosens = dosen::select('kelompok_keahlian')
+            ->where('kelompok_keahlian', '!=', null)
+            ->orderBy('kelompok_keahlian', 'asc')
+            ->get()
+            ->groupBy('kelompok_keahlian')
+            ->map(function ($item) {
+                return [
+                    // slice "Kelompok Keahlian" from the kelompok_keahlian name
+                    'kelompok_keahlian_name' => $item->first()->kelompok_keahlian,
+                    'jumlah' => $item->count(), // Count occurrences of the kelompok_keahlian
+                ];
+            })->values(); // Convert the map to indexed array
 
         // Return the structured API response
         return response()->json([
