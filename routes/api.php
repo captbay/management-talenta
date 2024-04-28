@@ -36,7 +36,7 @@ Route::group(['prefix' => 'auth', 'middleware' => ['auth:sanctum']], function ()
 });
 
 // dosen
-Route::group(['prefix' => 'dosen', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'dosen'], function () {
     Route::get('/', [DosenController::class, 'index']);
     Route::get('/{id}', [DosenController::class, 'show']);
     Route::post('/', [DosenController::class, 'store']);
@@ -44,8 +44,8 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['auth:sanctum']], function (
     Route::delete('/{id}', [DosenController::class, 'destroy']);
 });
 
-// graph 
-Route::group(['prefix' => 'graph', 'middleware' => ['auth:sanctum']], function () {
+// graph
+Route::group(['prefix' => 'graph'], function () {
     // dosen
     Route::get('/count-prodi', [DosenController::class, 'countProdi']);
     Route::get('/count-kelompok-keahlian', [DosenController::class, 'countKelompokKeahlian']);
@@ -56,7 +56,7 @@ Route::group(['prefix' => 'graph', 'middleware' => ['auth:sanctum']], function (
 });
 
 // pegawai
-Route::group(['prefix' => 'pegawai', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'pegawai'], function () {
     Route::get('/', [PegawaiController::class, 'index']);
     Route::get('/{id}', [PegawaiController::class, 'show']);
     Route::post('/', [PegawaiController::class, 'store']);
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'pegawai', 'middleware' => ['auth:sanctum']], function
 });
 
 // kepala-sdm
-Route::group(['prefix' => 'kepala-sdm', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'kepala-sdm'], function () {
     Route::get('/', [KepalaUrusanSumberDayaController::class, 'index']);
     Route::get('/{id}', [KepalaUrusanSumberDayaController::class, 'show']);
     Route::post('/', [KepalaUrusanSumberDayaController::class, 'store']);
@@ -74,7 +74,7 @@ Route::group(['prefix' => 'kepala-sdm', 'middleware' => ['auth:sanctum']], funct
 });
 
 // ketua-kelompok-keahlian
-Route::group(['prefix' => 'ketua-kelompok-keahlian', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'ketua-kelompok-keahlian'], function () {
     Route::get('/', [KetuaKelompokKeahlianController::class, 'index']);
     Route::get('/{id}', [KetuaKelompokKeahlianController::class, 'show']);
     Route::post('/', [KetuaKelompokKeahlianController::class, 'store']);
@@ -83,7 +83,7 @@ Route::group(['prefix' => 'ketua-kelompok-keahlian', 'middleware' => ['auth:sanc
 });
 
 // ketua-program-studi
-Route::group(['prefix' => 'ketua-program-studi', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'ketua-program-studi'], function () {
     Route::get('/', [KetuaProgramStudiController::class, 'index']);
     Route::get('/{id}', [KetuaProgramStudiController::class, 'show']);
     Route::post('/', [KetuaProgramStudiController::class, 'store']);
@@ -92,7 +92,7 @@ Route::group(['prefix' => 'ketua-program-studi', 'middleware' => ['auth:sanctum'
 });
 
 // bidang-ii
-Route::group(['prefix' => 'bidang-ii', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'bidang-ii'], function () {
     Route::get('/', [BidangIIController::class, 'index']);
     Route::get('/{id}', [BidangIIController::class, 'show']);
     Route::post('/', [BidangIIController::class, 'store']);
